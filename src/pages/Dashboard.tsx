@@ -15,7 +15,7 @@ const fallbackImage = 'https://images.unsplash.com/photo-1501004318641-b39e6451b
 
 function Dashboard() {
   const [sensorData, setSensorData] = useState<SensorData>(defaultSensorData)
-  const [cropName] = useState(defaultCropName)
+  const [cropName, setCropName] = useState(defaultCropName)
   const [fieldImage, setFieldImage] = useState(fallbackImage)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
@@ -31,6 +31,28 @@ function Dashboard() {
       if (parsed.fieldImage) setFieldImage(parsed.fieldImage)
     } catch {
       // Ignore parse errors in prototype mode.
+    }
+  }, [])
+
+  useEffect(() => {
+    const loadCropName = () => {
+      const savedSettings = localStorage.getItem('smart-farm-settings')
+      if (!savedSettings) return
+
+      try {
+        const parsed = JSON.parse(savedSettings) as { crop?: string }
+        if (parsed.crop?.trim()) setCropName(parsed.crop.trim())
+      } catch {
+        // Ignore invalid saved settings in prototype mode.
+      }
+    }
+
+    loadCropName()
+    window.addEventListener('smart-farm-settings-updated', loadCropName)
+    window.addEventListener('storage', loadCropName)
+    return () => {
+      window.removeEventListener('smart-farm-settings-updated', loadCropName)
+      window.removeEventListener('storage', loadCropName)
     }
   }, [])
 

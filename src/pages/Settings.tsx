@@ -26,8 +26,17 @@ function Settings() {
     setSettings((prev) => ({ ...prev, [key]: value }))
   }
 
+  const updateCrop = (crop: string) => {
+    updateSetting('crop', crop)
+    const savedSettings = localStorage.getItem(STORAGE_KEY)
+    const previousSettings = savedSettings ? JSON.parse(savedSettings) as Partial<SettingsState> : {}
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...defaultSettings, ...previousSettings, crop }))
+    window.dispatchEvent(new Event('smart-farm-settings-updated'))
+  }
+
   const handleSave = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(settings))
+    window.dispatchEvent(new Event('smart-farm-settings-updated'))
     setSaved(true)
     setTimeout(() => setSaved(false), 1800)
   }
@@ -48,7 +57,7 @@ function Settings() {
             </label>
             <label className="block text-sm text-neutral-300">
               <span className="mb-1 block">Crop</span>
-              <input value={settings.crop} onChange={(e) => updateSetting('crop', e.target.value)} className="w-full rounded-xl border border-neutral-700 bg-neutral-900 px-3 py-2 text-white outline-none" />
+              <input value={settings.crop} onChange={(e) => updateCrop(e.target.value)} className="w-full rounded-xl border border-neutral-700 bg-neutral-900 px-3 py-2 text-white outline-none" />
             </label>
             <label className="block text-sm text-neutral-300">
               <span className="mb-1 block">Farm Size</span>
