@@ -78,11 +78,11 @@ function Settings() {
         <section className="space-y-4">
           <h3 className="text-sm uppercase tracking-[0.2em] text-neutral-400">Notification Settings</h3>
           <div className="grid gap-3 md:grid-cols-3">
-            {[
+            {([
               ['Irrigation alerts', 'irrigationAlerts', Bell],
               ['Disease alerts', 'diseaseAlerts', Shield],
               ['Weather alerts', 'weatherAlerts', Waves],
-            ].map(([label, key, Icon]) => (
+            ] as const).map(([label, key, Icon]) => (
               <button
                 key={key}
                 type="button"

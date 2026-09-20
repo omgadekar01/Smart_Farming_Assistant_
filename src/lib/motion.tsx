@@ -1,8 +1,8 @@
-import type { ComponentProps, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { createElement } from 'react'
 
 function animated(tag: keyof HTMLElementTagNameMap) {
-  return function MotionElement({ children, ...props }: ComponentProps<'div'> & { children?: ReactNode }) {
+  return function MotionElement({ children, ...props }: any) {
     return createElement(tag, props, children)
   }
 }

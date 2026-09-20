@@ -1,5 +1,5 @@
 import { motion } from '../lib/motion'
-import { Activity, CloudRain, Droplets, Sparkles, Thermometer, Wand2 } from '../lib/icons'
+import { Activity, CloudRain, Droplets, Sparkles, Wand2 } from '../lib/icons'
 import { useEffect, useMemo, useState } from 'react'
 import { Header, SidebarDrawer } from '../components/Header'
 import { SensorCard } from '../components/SensorCard'

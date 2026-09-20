@@ -1,6 +1,5 @@
-import { Droplets, Thermometer, CloudRain, Sprout } from '../lib/icons'
+import { Droplets, Thermometer, CloudRain } from '../lib/icons'
 import { motion } from '../lib/motion'
-import type { ReactNode } from 'react'
 
 const iconMap = {
   moisture: Droplets,

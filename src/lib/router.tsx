@@ -14,8 +14,8 @@ export function Routes({ children }: { children: ReactNode }) {
   const match = routes.find((route) => route && typeof route === 'object' && 'props' in route && ((route as { props: { path?: string } }).props.path === current || (route as { props: { path?: string } }).props.path === '*'))
   return match && typeof match === 'object' && 'props' in match ? (match as { props: { element: ReactNode } }).props.element : null
 }
-export function NavLink({ to, className, children }: { to: string; className?: string | ((args: { isActive: boolean }) => string); children: ReactNode }) {
+export function NavLink({ to, className, children, onClick }: { to: string; className?: string | ((args: { isActive: boolean }) => string); children: ReactNode; onClick?: () => void }) {
   const isActive = window.location.pathname === to
   const classes = typeof className === 'function' ? className({ isActive }) : className
-  return <a href={to} className={classes}>{children}</a>
+  return <a href={to} className={classes} onClick={onClick}>{children}</a>
 }
