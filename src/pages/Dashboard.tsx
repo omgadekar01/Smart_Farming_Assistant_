@@ -6,7 +6,6 @@ import { SensorCard } from '../components/SensorCard'
 import { CropCard } from '../components/CropCard'
 import { FieldImageCard } from '../components/FieldImageCard'
 import { RecommendationCard } from '../components/RecommendationCard'
-import { BottomNavigation } from '../components/BottomNavigation'
 import { getRecommendation } from '../utils/recommendationEngine'
 import { defaultSensorData, defaultCropName } from '../data/mockSensorData'
 import { generateSensorData, resetDemoSensorData } from '../utils/sensorSimulator'
@@ -191,7 +190,6 @@ function Dashboard() {
         <Droplets className="h-5 w-5 text-green-300" />
       </button>
 
-      <BottomNavigation />
     </div>
   )
 }
