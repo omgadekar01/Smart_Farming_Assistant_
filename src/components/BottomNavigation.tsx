@@ -1,14 +1,25 @@
+import { useEffect, useState } from 'react'
 import { Bell, History, Home, Settings } from '../lib/icons'
 import { NavLink } from '../lib/router'
 
 const navItems = [
-  { label: 'Dashboard', path: '/', icon: Home },
+  { label: 'Dashboard', path: '/dashboard', icon: Home },
   { label: 'History', path: '/history', icon: History },
   { label: 'Alert', path: '/alerts', icon: Bell },
   { label: 'Setting', path: '/settings', icon: Settings },
 ]
 
 export function BottomNavigation() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+
+  useEffect(() => {
+    const updatePath = () => setCurrentPath(window.location.pathname)
+    window.addEventListener('popstate', updatePath)
+    return () => window.removeEventListener('popstate', updatePath)
+  }, [])
+
+  if (currentPath === '/') return null
+
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 mx-auto max-w-[1200px] px-4 pb-3 pt-2">
       <div className="flex items-center justify-between rounded-2xl border border-neutral-700 bg-[#1d1d1d]/95 px-3 py-2 shadow-2xl shadow-black/30 backdrop-blur-sm">

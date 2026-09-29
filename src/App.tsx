@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from './lib/router'
+import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import History from './pages/History'
 import Alerts from './pages/Alerts'
@@ -10,7 +11,8 @@ function App() {
     <BrowserRouter>
       <div className="min-h-screen bg-[#050505] text-white">
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/history" element={<History />} />
           <Route path="/alerts" element={<Alerts />} />
           <Route path="/settings" element={<Settings />} />
